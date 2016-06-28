@@ -123,7 +123,7 @@ module DeviseTokenAuth::Concerns::User
   def token_is_current?(token, client_id)
     # ghetto HashWithIndifferentAccess
     expiry     = self.tokens[client_id]['expiry'] || self.tokens[client_id][:expiry]
-    token_hash = self.tokens[client_id]['token'] || self.tokens[client_id][:token]
+    token_hash = self.tokens[client_id]['last_token'] || self.tokens[client_id][:last_token]
 
     return true if (
       # ensure that expiry and token are set
