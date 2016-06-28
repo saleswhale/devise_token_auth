@@ -106,7 +106,7 @@ module DeviseTokenAuth::Concerns::User
     return false unless self.tokens[client_id]
 
     return true if token_is_current?(token, client_id)
-    return true if token_can_be_reused?(token, client_id)
+    #return true if token_can_be_reused?(token, client_id)
 
     # return false if none of the above conditions are met
     return false
@@ -133,7 +133,8 @@ module DeviseTokenAuth::Concerns::User
       DateTime.strptime(expiry.to_s, '%s') > Time.now and
 
       # ensure that the token is valid
-      DeviseTokenAuth::Concerns::User.tokens_match?(token_hash, token)
+      token == token_hash
+      #DeviseTokenAuth::Concerns::User.tokens_match?(token_hash, token)
     )
   end
 
